@@ -89,7 +89,7 @@ The response is a JSON object containing the weather forecast for the matched ci
     "results": [
         {	
 			"state": "Distrito Federal",
-            "city": "Mexico City",
+			"city": "Mexico City",
             "forecast": [
                 {"date": "2024-10-04", "temperature_max": 23.1, "temperature_min": 15.0, "weather": "scattered clouds"},
                 {"date": "2024-10-05", "temperature_max": 22.5, "temperature_min": 14.8, "weather": "light rain"}
