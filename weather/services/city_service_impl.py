@@ -25,13 +25,14 @@ class CityService(ICityService):
         cache_key = f"city_coordinates_{city_name}"
         cache.set(cache_key, city_list, timeout=CACHE_TIME_OUT_CITY)
         
-    def _build_cities(self, places: CityList ) -> List[CityType]:
-        return [
-            {
+    def _build_cities(self, places: CityList) -> List[CityType]:
+        unique_cities = {
+            (place["lat"], place["long"]): {
                 "name": place["display"],
                 "latitude": place["lat"],
                 "longitude": place["long"]
             }
             for place in places
             if place["result_type"] == "city" and place["lat"] is not None and place["long"] is not None
-        ]
+        }
+        return list(unique_cities.values())

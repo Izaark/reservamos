@@ -1,5 +1,7 @@
 import logging
 from django.http import JsonResponse
+from weather.services.city_service import ICityService, CityList
+from weather.services.weather_service import IWeatherService, ForecastList
 from weather.inject_container import container
 
 
@@ -7,7 +9,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 class WeatherForecastView:
-    def __init__(self, city_service, weather_service):
+    def __init__(self, city_service: ICityService, weather_service: IWeatherService) -> None:
         self.city_service = city_service
         self.weather_service = weather_service
 
@@ -24,21 +26,21 @@ class WeatherForecastView:
         forecasts = await self._get_weather_forecast(cities)
         return self._build_response(cities, forecasts)
         
-    async def _get_city_coordinates(self, city_name: str):
+    async def _get_city_coordinates(self, city_name: str) -> CityList:
         try:
             return await self.city_service.get_city_coordinates(city_name)
         except Exception as e:
             logger.error(f"Error getting city coordinates from {city_name}: {e}")
             return None
 
-    async def _get_weather_forecast(self, cities):
+    async def _get_weather_forecast(self, cities: CityList) -> ForecastList:
         try:
             return await self.weather_service.get_weather_forecast(cities)
         except Exception as e:
             logger.error(f"Error getting forecast: {e}")
             return []
         
-    def _build_response(self, cities, forecasts):
+    def _build_response(self, cities: CityList, forecasts: ForecastList) -> JsonResponse:
         results = [
             {
                 "city": city["name"],

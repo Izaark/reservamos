@@ -37,6 +37,7 @@ def test_build_cities(city_service):
     places = [
         {"display": "Ciudad de México", "lat": 19.4326, "long": -99.1332, "result_type": "city"},
         {"display": "Monterrey", "lat": 25.6866, "long": -100.3161, "result_type": "city"},
+        {"display": "Monterrey", "lat": 25.6866, "long": -100.3161, "result_type": "city"},
         {"display": "Tijuana", "lat": None, "long": None, "result_type": "city"},
         {"display": "Non-City Place", "lat": 22.5726, "long": 88.3639, "result_type": "terminal"}
     ]
