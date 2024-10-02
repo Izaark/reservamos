@@ -2,7 +2,7 @@ from typing import List
 from django.core.cache import cache
 from weather.clients.reservamos import IReservamosClient
 from weather.services.city_service import ICityService, CityList, CityType
-from weather.services.services_constants import CACHE_TIME_OUT_CITY, CITY_TYPE
+from weather.services.services_constants import CACHE_TIME_OUT_CITY, CITY_TYPE, MEXICO_COUNTRY
 
 
 class CityService(ICityService):
@@ -34,6 +34,6 @@ class CityService(ICityService):
                 "longitude": place["long"]
             }
             for place in places
-            if place["result_type"] == CITY_TYPE and place["lat"] is not None and place["long"] is not None
+            if place["result_type"] == CITY_TYPE and place["country"] == MEXICO_COUNTRY and place["lat"] is not None and place["long"] is not None
         }
         return list(unique_cities.values())

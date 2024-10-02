@@ -35,11 +35,12 @@ async def test_get_city_coordinates_empty_response(city_service, mock_reservamos
 
 def test_build_cities(city_service):
     places = [
-        {"display": "Ciudad de México", "lat": 19.4326, "long": -99.1332, "result_type": "city", "state": "Distrito Federal"},
-        {"display": "Monterrey", "lat": 25.6866, "long": -100.3161, "result_type": "city", "state": "Nuevo Leon"},
-        {"display": "Monterrey", "lat": 25.6866, "long": -100.3161, "result_type": "city", "state": "Nuevo Leon"},
-        {"display": "Tijuana", "lat": None, "long": None, "result_type": "city", "state": "Tijuana"},
-        {"display": "Non-City Place", "lat": 22.5726, "long": 88.3639, "result_type": "terminal", "state": "Distrito Federal"}
+        {"display": "Ciudad de México", "lat": 19.4326, "long": -99.1332, "result_type": "city", "state": "Distrito Federal", "country": "México"},
+        {"display": "Monterrey", "lat": 25.6866, "long": -100.3161, "result_type": "city", "state": "Nuevo Leon", "country": "México"},
+        {"display": "Monterrey", "lat": 25.6866, "long": -100.3161, "result_type": "city", "state": "Nuevo Leon", "country": "México"},
+        {"display": "Tijuana", "lat": None, "long": None, "result_type": "city", "state": "Tijuana", "country": "México"},
+        {"display": "No City Place", "lat": 22.5726, "long": 88.3639, "result_type": "terminal", "state": "Distrito Federal", "country": "México"},
+        {"display": "No Mexico Place", "lat": 19.4326, "long": -99.1332, "result_type": "city", "state": "New York", "country": "USA"},
     ]
     expected_result = [
         {"name": "Ciudad de México", "latitude": 19.4326, "longitude": -99.1332, "state": "Distrito Federal"},
