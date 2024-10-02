@@ -1,5 +1,5 @@
 import logging
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpRequest
 from weather.services.city_service import ICityService, CityList
 from weather.services.weather_service import IWeatherService, ForecastList
 from weather.inject_container import container
@@ -13,7 +13,7 @@ class WeatherForecastView:
         self.city_service = city_service
         self.weather_service = weather_service
 
-    async def get_weather_forecast(self, request):
+    async def get_weather_forecast(self, request: HttpRequest) -> JsonResponse:
         city_name = request.GET.get("city", "")
         if not city_name:
             return JsonResponse({"error": "No city name provided."}, status=400)

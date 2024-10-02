@@ -2,6 +2,31 @@
 
 Weather API that allows to get weather information for different cities using OpenWeather and Reservamos API.
 
+## Architecture
+
+- **Views (Controllers)**:
+  - Handle HTTP requests and communicate with services.
+
+- **Services (CityService, WeatherService)**:
+  - Handle business logic.
+  - Interact with clients (external APIs).
+  - Implement interfaces to decouple logic and dependencies.
+
+- **Clients (ReservamosClient, OpenWeatherClient)**:
+  - Manage communication with external APIs.
+  - Implement interfaces to support different data providers.
+
+- **Dependency Container**:
+  - Manages service and client dependencies.
+  - Injects the appropriate implementations into each component.
+
+- **Caching Layer**:
+  - Used to store API responses and improve performance.
+
+### Communication Flow:
+- **Views** ⟶ **Services** ⟶ **Clients** ⟶ **External APIs**
+- **Services** ⟶ **Caching Layer** (to optimize calls and results)
+
 ## Setup
 
 ## 1. Clone the Repository
@@ -62,7 +87,8 @@ The response is a JSON object containing the weather forecast for the matched ci
 ```json
 {
     "results": [
-        {
+        {	
+			"state": "Distrito Federal",
             "city": "Mexico City",
             "forecast": [
                 {"date": "2024-10-04", "temperature_max": 23.1, "temperature_min": 15.0, "weather": "scattered clouds"},
