@@ -43,6 +43,7 @@ class WeatherForecastView:
     def _build_response(self, cities: CityList, forecasts: ForecastList) -> JsonResponse:
         results = [
             {
+                "state": city["state"],
                 "city": city["name"],
                 "forecast": forecast
             }

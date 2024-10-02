@@ -18,7 +18,7 @@ def weather_forecast_view_instance(mock_city_service, mock_weather_service):
 @pytest.mark.asyncio
 async def test_get_weather_forecast_success(mocker, weather_forecast_view_instance, mock_city_service, mock_weather_service):
     mock_city_service.get_city_coordinates.return_value = [
-        {"name": "Ciudad de México", "latitude": 19.4326, "longitude": -99.1332}
+        {"name": "Ciudad de México", "latitude": 19.4326, "longitude": -99.1332, "state": "DF"}
     ]
     mock_weather_service.get_weather_forecast.return_value = [
         [
@@ -32,7 +32,8 @@ async def test_get_weather_forecast_success(mocker, weather_forecast_view_instan
     
     expected_response = JsonResponse({
         "results": [
-            {
+            {   
+                "state": "DF",
                 "city": "Ciudad de México",
                 "forecast": [
                     {"date": "2024-10-02", "temperature_max": 25.0, "temperature_min": 15.0, "weather": "clear sky"},
